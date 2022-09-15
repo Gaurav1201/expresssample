@@ -1,0 +1,75 @@
+<html>
+    <head>
+      
+        <style>
+            
+            h1{color: aqua;}
+            .userblogcard{background-color: aqua;
+                height: fit-content;
+                border-radius: 2%;
+                width: 100%;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            }
+            .userblogcard p{
+                background-color: aliceblue;
+            }
+            .userblogcard button{
+                height: fit-content;
+                width: fit-content;
+            }
+            .buttoneddel {
+                display: flex;
+                flex-direction: row;
+                gap:50px;
+            }
+        </style>
+       
+    </head>
+    <body>
+        <h1> Welcome <%= user_name %></h1>
+            <div class="userblogcard">
+            <p><%= user_name %></p>
+            
+            <% Array.from(blogs1).forEach(blog => { %>
+            
+            <p><%= blog.blog_id %></p>
+            <p><%= blog.blog_heading %> </p>
+            <p><%= blog.blog_content %></p>
+            <div><button class="buttondel" data-deletereq = <%= blog.blog_id %>>Delete</button>
+                <button class="buttondel" data-editreq="">EDIT</button>
+                </div>
+            <% }); %>
+            <!--<div><button class="buttondel" data-deletereq=<% Array.from(blogs1).blog_id %>>Delete</button>
+            <button class="buttondel" data-editreq="">EDIT</button>
+            </div>-->
+            </div>
+            <script>
+                let deleterequest = document.querySelectorAll('.buttondel')
+                //deleterequest.addEventListener('click',(e)=>{alert("jh")})
+                console.log(deleterequest)
+                Array.from(deleterequest).forEach((a)=>{
+                        a.addEventListener('click',(e)=>{
+                            var endpiont = `http://localhost:8080/deleteblog/${a.dataset.deletereq}`
+                            console.log(endpiont)
+                            fetch(endpiont,{
+                        method:'DELETE'
+                    }).then(()=>{console.log("then")})
+                    .catch((err)=>{console.log(err)})
+                        })
+                })
+               /* deleterequest.addEventListener('click',(e)=>{
+                    console.log(deleterequest)
+                    console.log('jjll')
+                    console.log(deleterequest.dataset)
+                    var endpiont = `http://localhost:8080/deleteblog/?id=${deleterequest.dataset.deletereq}`
+                    console.log(endpiont)
+                    fetch(endpiont,{
+                        method:'DELETE'
+                    }).then(()=>{console.log("then")})
+                    .catch((err)=>{console.log(err)})
+                })*/
+            </script>
+    </body>
+</html>
