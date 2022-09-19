@@ -1,38 +1,78 @@
 <html>
     <head>
         <style>
+             body{
+                background-image: url("/images/intropageImage.jpg");
+             }
+            img{
+                width: 100%;
+                height: 100%;
+            }
             form{
                 display:flex;
                 flex-direction: column;
                 width: fit-content;
             }
-            .navdash{
-                width:100%;
-                display: flex;
-                flex-direction: row;
-                gap:10px ;
-                background: aqua;
-                flex-wrap: wrap;
-                justify-content:space-between;
-            }
+        .navdash{
+                
+margin: 40px auto 0;
+
+position: relative;
+width: 590px;
+height: 50px;
+background-color: #34495e;
+border-radius: 8px;
+font-size: 0;
+        }
+    .navdash a {
+	line-height: 50px;
+	height: 100%;
+	font-size: 15px;
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+        }
+        a:nth-child(1) {
+	width: 100px;
+}
+        a:nth-child(2) {
+	width: 110px;
+}
+a:nth-child(3) {
+	width: 100px;
+}
+a:nth-child(4) {
+	width: 160px;
+}
+a:nth-child(5) {
+	width: 120px;
+}
+h1{
+text-align: center;
+	margin: 40px 0 40px;
+	text-align: center;
+	font-size: 30px;
+	color: #ecf0f1;
+	text-shadow: 2px 2px 4px #000000;
+	font-family: 'Cherry Swash', cursive; }
         </style>
     </head>
     <body>
-        
         <h1> Welcome</h1>
         <div class="navdash">
-            <a href="http://localhost:8080/viewblog" ><button>view blog</button></a>
-
-            <a href="http://localhost:8080/signin" ><button>Home</button></a>
-            <a href="http://localhost:8080/addblog" ><button>BLOG</button></a>
-            <input type="search" placeholder="enter user_id"></input>
-            <a href="http://localhost:8080/signin" ><button>SIGN UP</button></a>
-            <a href="http://localhost:8080/selectblog" ><button>view blogs</button></a>
-
-           <!-- <button>LOG IN</button>-->
-            <a href="http://localhost:8080/login" ><button>Login</button></a>
-
+            <a href="http://localhost:8080/" >Home</a>
+            <a href="http://localhost:8080/addblog" >ADD BLOG</a>
+           <!-- <input type="search" placeholder="enter user_id"></input>-->
+            <a href="http://localhost:8080/signin" >SIGN UP</a>
+            <a href="http://localhost:8080/selectblog" >VIEW BLOGS</a>
+            <a method='get' href="http://localhost:8080/login" >Login</a>
         </div>
+       <!--<img src="/images/intropageImage.jpg" alt="image"  />-->
 
     </body>
 </html>
