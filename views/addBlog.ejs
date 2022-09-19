@@ -2,33 +2,17 @@
     <head>
         <style>
             form{
-                display: flex;
-  flex-direction: column;
-  background: #fff;
-  padding: 2rem;
-  width: 530px;
-  height: 380px;
-  border-radius: 0.5rem; 
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+                display:flex;
+                flex-direction: column;
+                width: fit-content;
             }
-            form input {
-  border: 2px solid #34495e;
-  padding: 0.8rem 1rem;
-  margin-bottom: 0.8rem;
-  margin-top: 0.8rem;
-  
-  font-size: 1.1rem;
-}
         </style>
     </head>
     <body>
         <form action="http://localhost:8080/addBlog">
-            <input  required  name = "heading"type="text" placeholder="enter headin">
-            <input required  name='blogcontent'placeholder="enter content"/>
-            <input type="submit" value="ADD BLOG">
+            <input name = "heading"type="text" placeholder="enter headin">
+            <input type="text" name='blogcontent'placeholder="enter content">
+            <input type="submit">
         </form>
 
         

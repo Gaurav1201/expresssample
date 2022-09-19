@@ -4,15 +4,10 @@ const express = require('express');
 const app = express()
 app.use(urlencoded({extended:true}))
 
-app.use(express.static("public"))
 //app = require(express.Router())
 
 var mysql = require('mysql');
 
-
-function redirecttoHome(res){
-  res.render('intropage.ejs')
-}
 
 /////import mod
 /*const loginRouter = require('./loginpage.js')
@@ -55,16 +50,13 @@ res.render('intropage.ejs',{text:nameu});
 
 let blogs;
 app.get('/selectblog',(req,res)=>{
-  
-  let selectblogs = "SELECT blog_id, blog_content, blog_heading, blog_date from blog where user_id= "+uid;
+ 
+  let selectblogs = "SELECT blog_id, blog_content, blog_heading from blog where user_id= "+uid;
   if(signin1){
   connection.query(selectblogs,  (err, result, fields) => {
     if (err) {throw err}
     console.log(result)
-    try{blogs = result;}
-    catch{
-      console.log("catch select")
-    }
+    blogs = result;
     res.render('viewblog.ejs',{blogs1:blogs, user_name:nameu});
     
     blogs.forEach(blog => {
@@ -73,12 +65,10 @@ app.get('/selectblog',(req,res)=>{
       console.log(blog.blog_heading)
       console.log(blog.blog_content)
       console.log(blog.blog_id)
-      console.log(blog.blog_date)
     });
    //res.render('viewblog.ejs',{blogs1:blogs});
   })
 }
-else{res.render('index.ejs',{signin:signin1})}
 
  // res.render('viewblog.ejs',{blogs1:blogs});
 })
@@ -91,27 +81,19 @@ app.get('/redirect1',(req,res)=>{
   return res.redirect("http://localhost:8080/addblog")
 })
 
-app.get('/intropage',(req,res)=>{
-  res.render('intropage1.ejs',{userNameAv:signin1,userName:'hello'})
-})
-
 
 ////login page
 
-app.get('/login',(req,res)=>{
-  res.render('loginpage.ejs',{pass1:true})
-})
 
-var redirecttointro= false;
-app.post('/login',(req,res)=>{
-  let uemail = req.body.email;
-  let pass = req.body.password;
+app.get('/login',(req,res)=>{
+  let uemail = req.query.email;
+  let pass = req.query.password;
   
   console.log("email and pssword from query----"+uemail+" "+pass);
   
-  if(req.body.email!=null && req.body.password!=null){
+  if(req.query.email!=null && req.query.password!=null){
   
-  let loginquer = "SELECT email_id, password_u from user_info where email_id = '"+req.body.email+"'";
+  let loginquer = "SELECT email_id, password_u from user_info where email_id = '"+req.query.email+"'";
   console.log("login "+loginquer);
  
   let useremail = "", password_user="";
@@ -120,38 +102,53 @@ app.post('/login',(req,res)=>{
     
     if (err) {throw err}
     console.log(result)
-    try{
+    
     useremail = result[0].email_id;
     password_user = result[0].password_u;
-    console.log("sql returned")
-    }
-    catch(e){
-      console.log(e)
-    }
+    
     if(password_user==pass){
-      redirecttointro = true;
       console.log("if")
-      signin1 = true
       console.log("sql pass is --"+password_user+"query paas is--"+pass)
-      res.render('intropage.ejs')
+          // return  res.redirect('http://localhost:8080/addblog')
+
+      // res.render("intropage.ejs");
+      return  res.redirect('http://localhost:8080/addblog')
+
     }
     else{
       console.log("else")
-   console.log("sql pass is--"+password_user+"quey pss --"+pass)
-      res.render('loginpage.ejs',{pass1:false})
+      console.log("sql pass is--"+password_user+"quey pss --"+pass)
+      //console.log(result.password_u)
+     // res.render('loginpage.ejs',{wrongcred:true})
     }
+
+    /*if(password_user==pass){
+      console.log("if")
+       res.render("intropage.ejs");
+    }
+    else{
+      console.log("else")
+      console.log(result.password_u)
+     // res.render('loginpage.ejs',{wrongcred:true})
+    }*/
   })
-  
+  /*if(password_user==pass){
+    console.log("if")
+    console.log("sql pass is --"+password_user+"query paas is--"+pass)
+     res.render("intropage.ejs");
+  }
+  else{
+    console.log("else")
+    console.log("sql pass is--"+password_user+"quey pss --"+pass)
+    //console.log(result.password_u)
+   // res.render('loginpage.ejs',{wrongcred:true})
+  }*/
 
 }
 
-/*if(redirecttointro==true){
-  res.render('intropage.ejs',{text:'hekjj'})
-}*/
-
+  
   //seesion vari username, password, email,uid
-
- 
+  res.render('loginpage.ejs')
 })
 
 
@@ -209,7 +206,7 @@ app.get('/signin',(req,res)=>{
     //return res.redirect('/intropage.ejs')
 
    
-    res.render('index.ejs',{text:"name",signin:signin1, name:name, email:email, password:password, passwordmatch:false})
+    res.render('index.ejs',{text:"name", name:name, email:email, password:password, passwordmatch:false})
 
 })
 
@@ -236,10 +233,10 @@ app.get('/addblog',(req,res)=>{
    else{ let status1 = 0;
     var blogheading = req.query.heading;
     var blogcontent = req.query.blogcontent;
-    var datetime = new Date().toLocaleString();
+    var date1 = new Date();
    
     if(blogcontent!=null && blogheading!=null){
-    let strjn = "INSERT INTO blog(user_id,blog_content, blog_heading, blog_date) VALUES( "+uid + " , '"+blogcontent+"' , '" + blogheading+"' , '" + new Date().toISOString().slice(0, 19).replace("T", " ") +"')";
+    let strjn = "INSERT INTO blog(user_id,blog_content, blog_heading) VALUES( "+uid + " , '"+blogcontent+"' , '" + blogheading+"')";
    
     connection.query(strjn,  (err, result, fields) => {
         if (err) {throw err;}
