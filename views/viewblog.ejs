@@ -1,49 +1,72 @@
 <html>
     <head>
-      
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
         <style>
             
-            h1{color: aqua;}
-            .userblogcard{background-color: aqua;
-                height: fit-content;
-                border-radius: 2%;
-                width: 100%;
-            display: flex;
-            gap: 10px;
-            flex-direction: column;
-            }
-            .userblogcard p{
-                background-color: aliceblue;
-            }
-            .userblogcard button{
-                height: fit-content;
-                width: fit-content;
-            }
-            .buttoneddel {
-                display: flex;
-                flex-direction: row;
-                gap:50px;
-            }
-        </style>
+            h1{color: white;}
+           
+            
+            .ico{background-color: #34495e;}
+          
+        /*.blogs_card{background-color: #34495e;}*/
+        
+        /*.separate{display: flex;gap:10px;flex-direction: row;background-color: #34495e;}
+       */
+       .userblogcard{
+        background-color: aliceblue;    
+        
+        font-family: 'Times New Roman', Times, serif;
+       } </style>
        
     </head>
     <body>
         <h1> Welcome <%= user_name %></h1>
-            <div class="userblogcard">
-            <p><%= user_name %></p>
+        <!--<div class="blogUserCard">
+            <div class="header_info">
+                <p><user_name %></p>
+                <p>name</p>
+            </div>
+            <div>
+                <p>Text</p>
+            </div>
+        </div>-->
+       
             
             <% Array.from(blogs1).forEach(blog => { %>
-            
-            <p><%= blog.blog_id %></p>
+            <div class= 'userblogcard' style="text-align: center;background-color: #34495e;">
+            <div class="nameAndID"><p>blogId <%= blog.blog_id %></p>
+            <p>@<%= user_name %></p></div>
             <p><%= blog.blog_heading %> </p>
             <p><%= blog.blog_content %></p>
-            <div><button class="buttondel" data-deletereq = <%= blog.blog_id %>>Delete</button>
+            <div>
+                <button class="buttondel" data-deletereq = <%= blog.blog_id %>>Delete</button>
                 <button class="buttondel" data-editreq="">EDIT</button>
-                </div>
+            </div>
+            </div>
             <% }); %>
+
+
+
+            <% Array.from(blogs1).forEach(blog => { %>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title"><%= blog.blog_heading %></h5>
+                      <h6 class="card-subtitle mb-2 text-muted"><%= blog.blog_date %></h6>
+                      <p class="card-text"><%= blog.blog_content %></p>
+                      <a href="#" class="card-link">Card link</a>
+                      <a href="#" class="card-link">Another link</a>
+                    </div>
+                  </div>
+                <% }); %>
             <!--<div><button class="buttondel" data-deletereq=<% Array.from(blogs1).blog_id %>>Delete</button>
             <button class="buttondel" data-editreq="">EDIT</button>
             </div>-->
+            
+            <div>
+            <% for(var i=0;i<5;i++) { %>
+                <p class="ico"><%= i %></p>
+            <% } %>
             </div>
             <script>
                 let deleterequest = document.querySelectorAll('.buttondel')

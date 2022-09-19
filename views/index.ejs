@@ -1,20 +1,78 @@
 <html>
-    <head>
-        <style>
-            form{
-                display:flex;
-                flex-direction: column;
-                width: fit-content;
-            }
-        </style>
-    </head>
-    <body>
-        <form action="http://localhost:8080/signin">
-            <input name = "name"type="text" placeholder="enter your name">
-            <input type="email" name="email" placeholder="enter your email">
-            <input type="number" name="phone_no" placeholder="mobile">
-            <input type="password" name='password'placeholder="enter your password">
-            <input type="submit">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+        /*background-color:hsl(260,100%,90%);*/
+      /* background-color:  #03f4fc;*/
+      background-color: #34495e;
+      }
+      
+
+    
+      div{
+        
+        border-style:ridge;
+        border-color:#34495e;
+        padding:15px;
+        width:235px;
+        background-color:white
+      }
+      .signin{
+        background-color: #34495e; 
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
+      .signinForm{
+        
+        display: flex;
+        flex-direction: column;
+        gap:10px;
+        
+      }
+      
+      
+      .signin:hover {background-color: #34495e;}
+      .signin:active{
+        background-color: #34495e;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+      }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <!-- <link rel="stylesheet" href="style.css" />-->
+  <title>Browser</title>
+</head>
+
+  <body>
+    
+        <form action="http://localhost:8080/signin" >
+          <div class="signinForm">
+            <h2 style="text-align: center"> Sign In</h2>
+
+            <input name = "name"type="text" placeholder="Enter your name"><br/>
+            <input type="email" name="email" placeholder="Enter your email"><br/>
+            <input type="tel" name="phone_no" placeholder="Enter mobile number"><br/>
+            <input type="password" name='password'placeholder="Enter your password"><br/>
+            <input type="submit" class="signin">
+          </div>
         </form>
-        </body>
+      <% if(signin==false) { %>
+        <p>You need to Sign Up first to view the blog</p>
+        <p>Alreadu have an account?<a style="color: green;" href="http://localhost:8080/login">Login</a></p>
+       <% } %>
+   
+
+
+    </body>
+
 </html>
